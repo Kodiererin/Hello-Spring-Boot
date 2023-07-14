@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class CricketCoash implements Coach {
     @Override
     public String getDailyWorkout() {
-        return "Practise Fast Bowling for 15 minutes.... :-) ";
+        return "Practise Fast Bowling for 15 minutes....";
     }
 }

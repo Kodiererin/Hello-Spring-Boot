@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
+//    Define a privtate field for Dependency
     private Coach myCoach;
+//    Define a Constructor for Dependency Injection
     @Autowired
-    public void setCoach(Coach theCoach){
+    DemoController(Coach theCoach){
         myCoach = theCoach;
     }
+
 
     @GetMapping("/dailyworkout")
     public String getDailyWorkout(){
