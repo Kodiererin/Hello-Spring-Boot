@@ -7,34 +7,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DemoController {
-
-//    Define a privtate field for Dependency
     private Coach myCoach;
-//    Define a Constructor for Dependency Injection
-//    @Autowired
-//    DemoController(@Qualifier("trackCoach") Coach theCoach){
-//        myCoach = theCoach;
-//    }
-
-
-//    Qualifier will start with small lower case even thought the class name starts with UpperCase
-//    @Autowired
-//    DemoController( Coach theCoach){
-//        myCoach = theCoach;
-//    }
-
-
-//    Qualifier has the Higher Priority than Primarry
-        @Autowired
-    DemoController(@Qualifier("trackCoach") Coach theCoach){
+    private Coach anotherCoach;
+    @Autowired
+    DemoController(@Qualifier("cricketCoach") Coach theCoach,
+                   @Qualifier("cricketCoach") Coach theAnotherCoach){
+//        As this is Singeleton so all dependency injections for the bean will reference the Same Bean.
             System.out.println("In Constructr : "+getClass().getSimpleName());
         myCoach = theCoach;
+        anotherCoach = theAnotherCoach;
     }
+
+
 
 
 
     @GetMapping("/dailyworkout")
     public String getDailyWorkout(){
         return this.myCoach.getDailyWorkout();
+    }
+
+
+    @GetMapping("/check")
+    public String check(){
+        return "Comparing Beans mycoach==anothercoach "+(myCoach==anotherCoach);
     }
 }
