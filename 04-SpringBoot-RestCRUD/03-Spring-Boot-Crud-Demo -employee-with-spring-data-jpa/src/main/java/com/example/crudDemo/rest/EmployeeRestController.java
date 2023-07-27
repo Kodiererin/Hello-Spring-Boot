@@ -1,8 +1,11 @@
 package com.example.crudDemo.rest;
 
 
+import com.example.crudDemo.dao.EmployeeDAO;
+import com.example.crudDemo.dao.EmployeeDAOImplementation;
 import com.example.crudDemo.entity.Employee;
 import com.example.crudDemo.service.EmployeeService;
+import com.example.crudDemo.service.EmployeeServiceInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,7 +63,7 @@ public class EmployeeRestController {
         if(e==null){
             throw new RuntimeException("Employee Does not exist");
         }else{
-            employeeService.delete(e.getI ));
+            employeeService.deleteById(e.getId());
             return "Deleted Employee "+e;
         }
 

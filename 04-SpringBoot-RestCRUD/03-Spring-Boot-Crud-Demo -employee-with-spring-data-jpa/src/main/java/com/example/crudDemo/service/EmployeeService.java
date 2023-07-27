@@ -12,5 +12,5 @@ public interface EmployeeService extends JpaRepository<Employee , Integer> {
 
     Employee save(Employee theEmployee);
 
-    void delete(int theId);
+    void deleteById(int theId);
 }
