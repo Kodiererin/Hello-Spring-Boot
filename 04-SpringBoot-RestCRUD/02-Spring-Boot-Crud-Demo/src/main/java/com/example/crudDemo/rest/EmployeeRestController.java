@@ -63,7 +63,7 @@ public class EmployeeRestController {
         if(e==null){
             throw new RuntimeException("Employee Does not exist");
         }else{
-            employeeService.delete(e.getI ));
+            employeeService.delete(e.getId());
             return "Deleted Employee "+e;
         }
 
