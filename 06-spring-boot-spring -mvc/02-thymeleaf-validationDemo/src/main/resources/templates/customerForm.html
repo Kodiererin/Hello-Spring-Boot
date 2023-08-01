@@ -1,0 +1,25 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Form</title>
+  <style>
+    .error{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<i>Fill Out the form (*) is Required</i>
+<form th:action="@{/processForm}" th:object="${customer}" method="POST">
+  First Name : <input type="text" th:field="*{firstName}"> <br><br>
+  Last Name : <input type="text" th:field="*{lastName}"> <br><br>
+
+<!--  Add Error Message if Present -->
+  <span th:if="${#fields.hasErrors('lastName')}"
+        th:errors="*{lastName}"
+        class="error"></span>
+  <br><br>
+  <input type="submit" value="submit">
+</form>
+</body>
+</html>
