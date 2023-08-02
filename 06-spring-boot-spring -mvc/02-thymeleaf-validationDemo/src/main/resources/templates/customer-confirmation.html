@@ -5,6 +5,6 @@
     <title>Customer Confirmation</title>
 </head>
 <body>
-  The Customer is Confirmed : <span th:text="${customer.firstName+ ' '+customer.lastName}" />
+  The Customer is Confirmed : <span th:text="${customer.firstName+ ' '+customer.lastName}+' and Free Passes is '+${customer.freePasses}+' and the Postal Code is '+${customer.postalCode}" />
 </body>
 </html>
