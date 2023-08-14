@@ -3,6 +3,9 @@ package com.Ujjwal.crudHIBERNATE.Hibernate.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //    Annotate the class as an eitity and map it to database table
 //    As it the second table so we also have to set up mapping to InstructorDetail entity
 @Entity
@@ -30,7 +33,33 @@ public class Instructor {
     public Instructor() {
     }
 
-        public Instructor(String firstName, String lastName, String email) {
+//    @OneToMany(mappedBy = "instructor" ,fetch = FetchType.EAGER, cascade = {CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH , CascadeType.PERSIST})
+
+    @OneToMany(mappedBy = "instructor" ,fetch = FetchType.LAZY, cascade = {CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH , CascadeType.PERSIST})
+//    this is mapping to the variable name so, be careful by your napimg.
+
+    private List<Course> courses;
+
+//    Add convenience methods for bi-directional relationships
+
+    public void add(Course tempCourse){
+
+        if(courses==null)
+            courses = new ArrayList<>();
+        courses.add(tempCourse);
+
+        tempCourse.setInstructor(this);
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public Instructor(String firstName, String lastName, String email) {
                 this.firstName = firstName;
                 this.lastName = lastName;
                 this.email = email;

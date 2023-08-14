@@ -3,6 +3,9 @@ package com.Ujjwal.crudHIBERNATE.Hibernate.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //    Annoatte the class as an entity and map to db table
 
 @Entity
@@ -44,6 +47,7 @@ public class InstructorDetail {
 
 
     //    Create constructors
+
 
     public InstructorDetail() {
     }
@@ -91,5 +95,7 @@ public class InstructorDetail {
                 ", hobby='" + hobby + '\'' +
                 '}';
     }
+
+
 }
 
