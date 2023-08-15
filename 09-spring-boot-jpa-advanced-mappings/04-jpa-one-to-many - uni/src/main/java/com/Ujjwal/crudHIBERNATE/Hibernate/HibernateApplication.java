@@ -1,10 +1,7 @@
 package com.Ujjwal.crudHIBERNATE.Hibernate;
 
 import com.Ujjwal.crudHIBERNATE.Hibernate.dao.AppDAO;
-import com.Ujjwal.crudHIBERNATE.Hibernate.entity.Course;
-import com.Ujjwal.crudHIBERNATE.Hibernate.entity.Instructor;
-import com.Ujjwal.crudHIBERNATE.Hibernate.entity.InstructorDetail;
-import com.Ujjwal.crudHIBERNATE.Hibernate.entity.Review;
+import com.Ujjwal.crudHIBERNATE.Hibernate.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,13 +21,89 @@ public class HibernateApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 		return runner ->{
-//			createCourseAndReviews(appDAO);
+//				createCourseAndStudents(appDAO);
+				
+//			Find Student by courseID;
+//				findCourseAndStudents(appDAO);
 
-//			retrieveCourseAndReviews(appDAO);
+//			Find Student By StudentID;
+//			findStudentAndCourse(appDAO);
 
-			deletingCourseAndReviews(appDAO);
+//			addMoreCourseForStudent(appDAO);
+
+//			Deleting Course
+//			DeleteCourse(appDAO);
+
+//			Deleting Studnet
+			DeleteStudent(appDAO);
 		};
 
+	}
+
+	private void DeleteStudent(AppDAO appDAO) {
+		System.out.println("Deleting Student");
+		int theId = 1;
+		appDAO.deleteStudentById(theId);
+		System.out.println("Object Deleted");
+	}
+
+	private void DeleteCourse(AppDAO appDAO) {
+		System.out.println("Deleting the Course");
+		int courseId = 10;
+		appDAO.deleteCourseById(courseId);
+		System.out.println("Course Deleted");
+	}
+
+	public void addMoreCourseForStudent(AppDAO appDao){
+		int theId = 2;
+		Student tempStudent = appDao.findStudentAndCouseByStudentId(theId);
+		System.out.println(tempStudent);
+
+//		Create More Course.
+		Course course = new Course("Hello World Course");
+		Course course1 = new Course("Hello World Course-2");
+		Course course2 = new Course("Hello World Course-3");
+
+		tempStudent.addCourse(course);
+		tempStudent.addCourse(course1);
+		tempStudent.addCourse(course2);
+
+		System.out.println("Saving the Course "+tempStudent);
+
+		appDao.updateStudentCourse(tempStudent);
+		System.out.println("Done!");
+	}
+
+	private void findStudentAndCourse(AppDAO appDAO) {
+		int theId = 2;
+		Student tempStudent = appDAO.findStudentAndCouseByStudentId(theId);
+
+		System.out.println("Loaded Student "+tempStudent);
+		System.out.println("Courses : "+tempStudent.getCourses());
+
+		System.out.println("Done");
+	}
+
+	private void findCourseAndStudents(AppDAO appDAO) {
+		int theId = 10;
+		Course c = appDAO.findCourseAndStudentsbyCourseId(theId);
+		System.out.println(c);
+	}
+
+	private void createCourseAndStudents(AppDAO appDAO) {
+//		Create a course
+		Course course = new Course("Machine Learning");
+//		Create the students
+		Student studentOne = new Student("Ujjwal" , "Kumar" , "whoisujjwal.live");
+		Student studentTwo = new Student("WhoisUjjwal" , "Kumar" , "ujjwal.whoisujjwal.live");
+//		Add students to the course
+		course.addStudent(studentOne);
+		course.addStudent(studentTwo);
+//		save the course and the associated students
+		System.out.println(course);
+		System.out.println(course.getStudents());
+		appDAO.saveCourse(course);
+		System.out.println("Student Saved");
 	}
 
 	private void deletingCourseAndReviews(AppDAO appDAO) {

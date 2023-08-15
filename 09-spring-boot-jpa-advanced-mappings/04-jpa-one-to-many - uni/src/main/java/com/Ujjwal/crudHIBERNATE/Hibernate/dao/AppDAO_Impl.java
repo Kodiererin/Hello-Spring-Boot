@@ -3,6 +3,7 @@ package com.Ujjwal.crudHIBERNATE.Hibernate.dao;
 import com.Ujjwal.crudHIBERNATE.Hibernate.entity.Course;
 import com.Ujjwal.crudHIBERNATE.Hibernate.entity.Instructor;
 import com.Ujjwal.crudHIBERNATE.Hibernate.entity.InstructorDetail;
+import com.Ujjwal.crudHIBERNATE.Hibernate.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,6 +156,42 @@ public class AppDAO_Impl implements AppDAO{
 
         Course c = query.getSingleResult();
         return c;
+    }
+
+    @Override
+    public Course findCourseAndStudentsbyCourseId(int theId) {
+//        Create query
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c join  fetch c.students where c.id  = :data" , Course.class);
+        query.setParameter("data" , theId);
+
+//        Execute the query
+
+        Course c = query.getSingleResult();
+        return c;
+    }
+
+    @Override
+    public Student findStudentAndCouseByStudentId(int theId) {
+        System.out.println("Finding The Student");
+        TypedQuery<Student> query = entityManager.createQuery("SELECT s from Student s JOIN  FETCH s.courses where s.id  = :data" , Student.class);
+        query.setParameter("data" , theId);
+
+        Student s = query.getSingleResult();
+        return  s;
+    }
+
+    @Override
+    @Transactional
+    public void updateStudentCourse(Student tempStudent) {
+        entityManager.merge(tempStudent);
+    }
+
+    @Override
+    @Transactional
+    public void deleteStudentById(int theId) {
+        Student s = entityManager.find(Student.class , theId);
+        System.out.println(s);
+        entityManager.remove(s);
     }
 
 }
