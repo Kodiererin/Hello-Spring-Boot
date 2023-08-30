@@ -9,17 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AccountDAOImpl implements AccountDAO {
 
-//    @Override
-//    public void addAccount() {
-//        System.out.println(getClass()+" : Doint my DB Work : Adding an Account");
-//    }
+    private String name;
+    private String serviceCode;
 
-
-
-//    @Override
-//    public void addAccount(Account theAccount) {
-//        System.out.println(getClass()+" : Doint my DB Work : Adding an Account");
-//    }
     @Override
     public void addAccount(Account theAccount , boolean theVIP) {
         System.out.println(getClass()+" : Doint my DB Work : Adding an Account");
@@ -30,13 +22,24 @@ public class AccountDAOImpl implements AccountDAO {
         System.out.println("Hello Ujjwal How Are You!");
     }
 
-//    @Override
-//    public void addUjjwalMember() {
-//        System.out.println("===> Hello This is Ujjwal <======");
-//    }
 
-//    @Override
-//    public void addAccount() {
-//        System.out.println("Hello World");
-//    }
+    public String getName() {
+        System.out.println(getClass()+" Do Work");
+        return name;
+    }
+
+    public void setName(String name) {
+        System.out.println(getClass()+" Do Work");
+        this.name = name;
+    }
+
+    public String getServiceCode() {
+        System.out.println(getClass()+" Do Work");
+        return serviceCode;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        System.out.println(getClass()+" Do Work");
+        this.serviceCode = serviceCode;
+    }
 }
